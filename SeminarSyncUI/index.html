@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SeminarSync Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 text-gray-800 font-sans p-8">
+    <div class="max-w-6xl mx-auto space-y-8">
+        
+        <header class="mb-8 text-center">
+            <h1 class="text-4xl font-bold text-blue-800">SeminarSync System</h1>
+            <p class="text-gray-600 mt-2">Faculty Seminar Attendance Dashboard</p>
+        </header>
+
+        <section class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-2xl font-semibold mb-4 text-gray-700">Faculty Members</h2>
+            <p id="faculty-message" class="text-blue-500 italic mb-4">Loading faculty data...</p>
+            
+            <div class="overflow-x-auto">
+                <table id="faculty-table" class="min-w-full table-auto hidden border-collapse border border-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-4 py-2 border border-gray-200 text-left text-sm font-semibold text-gray-600">ID</th>
+                            <th class="px-4 py-2 border border-gray-200 text-left text-sm font-semibold text-gray-600">Employee Number</th>
+                            <th class="px-4 py-2 border border-gray-200 text-left text-sm font-semibold text-gray-600">Last Name</th>
+                            <th class="px-4 py-2 border border-gray-200 text-left text-sm font-semibold text-gray-600">First Name</th>
+                            <th class="px-4 py-2 border border-gray-200 text-left text-sm font-semibold text-gray-600">Department</th>
+                            <th class="px-4 py-2 border border-gray-200 text-left text-sm font-semibold text-gray-600">Email</th>
+                        </tr>
+                    </thead>
+                    <tbody id="faculty-body" class="bg-white divide-y divide-gray-200">
+                        </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-2xl font-semibold mb-4 text-gray-700">Recent Attendance Records</h2>
+            <p id="attendance-message" class="text-blue-500 italic mb-4">Loading attendance logs...</p>
+            
+            <div class="overflow-x-auto">
+                <table id="attendance-table" class="min-w-full table-auto hidden border-collapse border border-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-4 py-2 border border-gray-200 text-left text-sm font-semibold text-gray-600">ID</th>
+                            <th class="px-4 py-2 border border-gray-200 text-left text-sm font-semibold text-gray-600">Emp No.</th>
+                            <th class="px-4 py-2 border border-gray-200 text-left text-sm font-semibold text-gray-600">Full Name</th>
+                            <th class="px-4 py-2 border border-gray-200 text-left text-sm font-semibold text-gray-600">Demographics</th>
+                            <th class="px-4 py-2 border border-gray-200 text-left text-sm font-semibold text-gray-600">Department</th>
+                            <th class="px-4 py-2 border border-gray-200 text-left text-sm font-semibold text-gray-600">Location (PSGC)</th>
+                            <th class="px-4 py-2 border border-gray-200 text-left text-sm font-semibold text-gray-600">Email</th>
+                        </tr>
+                    </thead>
+                    <tbody id="attendance-body" class="bg-white divide-y divide-gray-200">
+                        </tbody>
+                </table>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+
+</html>
