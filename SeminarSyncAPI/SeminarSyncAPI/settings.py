@@ -34,7 +34,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'SeminarSyncAPI.urls'
+ROOT_URLCONF = 'SeminarSyncAPI2.urls'
 
 TEMPLATES = [
     {
@@ -51,7 +51,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'SeminarSyncAPI.wsgi.application'
+WSGI_APPLICATION = 'SeminarSyncAPI2.wsgi.application'
 
 DATABASES = {
     'default': {
