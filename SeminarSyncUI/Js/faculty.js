@@ -1,5 +1,8 @@
 const API_BASE_URL = "http://127.0.0.1:8000/api";
 let allFaculty = [];
+let allDepartments = [];
+let editFacId = null;
+
 
 const facultyTableBody = document.getElementById("facultyTableBody");
 const facultySummary = document.getElementById("facultySummary");
@@ -7,229 +10,187 @@ const facultySearch = document.getElementById("facultySearch");
 const departmentFilter = document.getElementById("departmentFilter");
 const genderFilter = document.getElementById("genderFilter");
 const resetFilters = document.getElementById("resetFilters");
+const facultyModal = document.getElementById("facultyModal");
+const modalContainer = document.getElementById("modalContainer");
+const facultyForm = document.getElementById("facultyForm");
 
-// Helper to get initials for the avatar fallback
-function getInitials(firstName = "", lastName = "") {
-  const first = firstName.charAt(0).toUpperCase();
-  const last = lastName.charAt(0).toUpperCase();
-  return `${first}${last}`;
+
+// HELPERS
+function getInitials(f, l) { return `${f.charAt(0)}${l.charAt(0)}`.toUpperCase(); }
+function getGenderBadge(g) {
+ if (g === "Male") return "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300";
+ if (g === "Female") return "bg-pink-100 text-pink-800 dark:bg-pink-900/30 dark:text-pink-300";
+ return "bg-slate-100 text-slate-800";
 }
 
-// Helper to style the gender badge
-function getGenderBadge(gender) {
-  if (gender === "Male") {
-    return "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300";
-  }
-  if (gender === "Female") {
-    return "bg-pink-100 text-pink-800 dark:bg-pink-900/30 dark:text-pink-300";
-  }
-  return "bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-300";
+
+// FETCH DEPARTMENTS
+async function loadDepartments() {
+   try {
+       const res = await fetch(`${API_BASE_URL}/departments/`);
+       allDepartments = await res.json();
+      
+       // Populate Filter Dropdown
+       departmentFilter.innerHTML = '<option value="">All Departments</option>' +
+           allDepartments.map(d => `<option value="${d.name}">${d.name}</option>`).join("");
+
+
+       // Populate Modal Dropdown
+       document.getElementById("facDept").innerHTML = allDepartments.map(d =>
+           `<option value="${d.id}">${d.name}</option>`
+       ).join("");
+   } catch(e) { console.error("Dept load error", e); }
 }
 
-// Helper to calculate age from birthdate
-function calculateAge(birthdateStr) {
-    if (!birthdateStr) return 'N/A';
-    const birthDate = new Date(birthdateStr);
-    const today = new Date();
-    let age = today.getFullYear() - birthDate.getFullYear();
-    const m = today.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
-    }
-    return age;
+
+// RENDER TABLE
+function renderFaculty(data) {
+   if (!data.length) {
+       facultyTableBody.innerHTML = '<tr><td colspan="5" class="px-6 py-10 text-center text-sm text-slate-500">No records found.</td></tr>';
+       return;
+   }
+   facultyTableBody.innerHTML = data.map(f => {
+       const photoHtml = f.photo
+           ? `<img src="${f.photo}" class="size-10 rounded-full border border-slate-200 object-cover" />`
+           : `<div class="size-10 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold">${getInitials(f.first_name, f.last_name)}</div>`;
+
+
+       return `
+           <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/40 transition-colors">
+               <td class="px-6 py-4">
+                   <div class="flex items-center gap-3">
+                       ${photoHtml}
+                       <div>
+                           <p class="font-bold text-slate-900 dark:text-slate-100">${f.last_name}, ${f.first_name}</p>
+                           <p class="text-xs text-slate-500">ID: ${f.employee_number}</p>
+                       </div>
+                   </div>
+               </td>
+               <td class="px-6 py-4 text-sm font-semibold">${f.department_name || "-"}</td>
+               <td class="px-6 py-4 text-xs text-slate-500">${f.email}</td>
+               <td class="px-6 py-4">
+                   <span class="inline-flex px-2 py-0.5 rounded-full text-[10px] font-bold uppercase ${getGenderBadge(f.gender)}">${f.gender}</span>
+               </td>
+               <td class="px-6 py-4 text-right">
+                   <button onclick="openFacModal(${f.id})" class="p-2 text-slate-400 hover:text-blue-500 transition-colors"><span class="material-symbols-outlined">edit</span></button>
+                   <button onclick="deleteFac(${f.id})" class="p-2 text-slate-400 hover:text-red-500 transition-colors"><span class="material-symbols-outlined">delete</span></button>
+               </td>
+           </tr>`;
+   }).join("");
+   facultySummary.innerHTML = `Showing <span class="font-semibold">${data.length}</span> faculty members`;
 }
 
-// Helper to format the address nicely
-function formatAddress(street, cityCode) {
-    let location = [];
-    if (street) location.push(street);
-    if (cityCode) location.push(`City Code: ${cityCode}`);
-    return location.length > 0 ? location.join(', ') : 'No Address Data';
+
+// MODAL LOGIC
+function openFacModal(id = null) {
+   editFacId = id;
+   facultyModal.classList.replace("hidden", "flex");
+   setTimeout(() => modalContainer.classList.replace("opacity-0", "opacity-100"), 10);
+   setTimeout(() => modalContainer.classList.replace("scale-95", "scale-100"), 10);
+
+
+   if (id) {
+       document.getElementById("modalTitle").textContent = "Edit Faculty Record";
+       const f = allFaculty.find(x => x.id === id);
+       document.getElementById("facEmpNum").value = f.employee_number;
+       document.getElementById("facFirstName").value = f.first_name;
+       document.getElementById("facLastName").value = f.last_name;
+       document.getElementById("facEmail").value = f.email;
+       document.getElementById("facGender").value = f.gender;
+       const dept = allDepartments.find(d => d.name === f.department_name);
+       if(dept) document.getElementById("facDept").value = dept.id;
+   } else {
+       document.getElementById("modalTitle").textContent = "Add Faculty Member";
+       facultyForm.reset();
+   }
 }
 
-// Extract distinct departments to populate the dropdown
-function populateFilters(facultyData) {
-  const departments = [
-    ...new Set(facultyData.map((faculty) => faculty.department_name).filter(Boolean)),
-  ].sort();
+
+function closeFacModal() {
+   modalContainer.classList.replace("scale-100", "scale-95");
+   modalContainer.classList.replace("opacity-100", "opacity-0");
+   setTimeout(() => facultyModal.classList.replace("flex", "hidden"), 200);
+}
+
+
+// CRUD ACTIONS
+facultyForm.onsubmit = async (e) => {
+   e.preventDefault();
+   const formData = new FormData();
+   formData.append("employee_number", document.getElementById("facEmpNum").value);
+   formData.append("first_name", document.getElementById("facFirstName").value);
+   formData.append("last_name", document.getElementById("facLastName").value);
+   formData.append("email", document.getElementById("facEmail").value);
+   formData.append("gender", document.getElementById("facGender").value);
+   formData.append("department", document.getElementById("facDept").value);
   
-  departmentFilter.innerHTML = `<option value="">All Departments</option>`;
-  
-  departments.forEach((department) => {
-    departmentFilter.innerHTML += `<option value="${department}">${department}</option>`;
-  });
+   const file = document.getElementById("facPhoto").files[0];
+   if(file) formData.append("photo", file);
+
+
+   const method = editFacId ? "PUT" : "POST";
+   const url = editFacId ? `${API_BASE_URL}/faculty/${editFacId}/` : `${API_BASE_URL}/faculty/`;
+
+
+   await fetch(url, { method, body: formData });
+   closeFacModal();
+   loadFaculty();
+};
+
+
+async function deleteFac(id) {
+   if (confirm("Permanently delete this faculty member?")) {
+       await fetch(`${API_BASE_URL}/faculty/${id}/`, { method: "DELETE" });
+       loadFaculty();
+   }
 }
 
-// Render the HTML table rows
-function renderFaculty(facultyData) {
-  if (!facultyData.length) {
-    facultyTableBody.innerHTML = `
-      <tr>
-        <td colspan="5" class="px-6 py-10 text-center text-sm text-slate-500">
-          No faculty records found.
-        </td>
-      </tr>
-    `;
-    facultySummary.innerHTML = `Showing <span class="font-semibold">0</span> faculty members`;
-    return;
-  }
 
-  facultyTableBody.innerHTML = facultyData.map((faculty) => {
-      const photoHtml = faculty.photo
-        ? `<img src="${faculty.photo}" alt="${faculty.first_name} ${faculty.last_name}" class="size-10 rounded-full bg-slate-100 object-cover" />`
-        : `<div class="size-10 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold tracking-wider">${getInitials(faculty.first_name, faculty.last_name)}</div>`;
-
-      const age = calculateAge(faculty.birthdate);
-      const address = formatAddress(faculty.street_address, faculty.city_municipality_code);
-
-      return `
-        <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/40 transition-colors">
-          <td class="px-6 py-4">
-            <div class="flex items-center gap-3">
-              ${photoHtml}
-              <div>
-                <p class="font-bold text-slate-900 dark:text-slate-100">
-                  ${faculty.last_name}, ${faculty.first_name} ${faculty.middle_initial ? faculty.middle_initial + "." : ""}
-                </p>
-                <p class="text-xs text-slate-500">ID: ${faculty.employee_number}</p>
-              </div>
-            </div>
-          </td>
-          <td class="px-6 py-4">
-            <div class="text-sm font-semibold text-slate-700 dark:text-slate-200">
-              ${faculty.department_name ?? "-"}
-            </div>
-          </td>
-          <td class="px-6 py-4">
-            <div class="text-sm">
-              <p class="text-slate-700 dark:text-slate-200 flex items-center gap-1">
-                <span class="material-symbols-outlined text-sm text-slate-400">phone</span>
-                ${faculty.phone ?? "N/A"}
-              </p>
-              <p class="text-xs text-slate-500 flex items-center gap-1 mt-1">
-                <span class="material-symbols-outlined text-sm text-slate-400">mail</span>
-                ${faculty.email ?? "N/A"}
-              </p>
-              <p class="text-[10px] text-slate-400 mt-1 max-w-[150px] truncate" title="${address}">
-                ${address}
-              </p>
-            </div>
-          </td>
-          <td class="px-6 py-4">
-            <div class="flex flex-col gap-1 items-start">
-              <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wide ${getGenderBadge(faculty.gender)}">
-                ${faculty.gender ?? "Unknown"}
-              </span>
-              <span class="text-xs text-slate-500">${age} yrs old</span>
-            </div>
-          </td>
-          <td class="px-6 py-4 text-right">
-            <div class="flex justify-end gap-2">
-              <button class="p-2 text-slate-400 hover:text-primary transition-colors" title="View Profile">
-                <span class="material-symbols-outlined">visibility</span>
-              </button>
-              <button class="p-2 text-slate-400 hover:text-blue-500 transition-colors" title="Edit Record">
-                <span class="material-symbols-outlined">edit</span>
-              </button>
-              <button class="p-2 text-slate-400 hover:text-red-500 transition-colors" title="Delete Record">
-                <span class="material-symbols-outlined">delete</span>
-              </button>
-            </div>
-          </td>
-        </tr>
-      `;
-    }).join("");
-
-  facultySummary.innerHTML = `Showing <span class="font-semibold">${facultyData.length}</span> faculty member${facultyData.length !== 1 ? "s" : ""}`;
-}
-
-// Handle search and dropdown filtering
+// FILTERING LOGIC
 function applyFilters() {
-  const searchValue = facultySearch.value.trim().toLowerCase();
-  const selectedDepartment = departmentFilter.value;
-  const selectedGender = genderFilter.value;
+ const searchTerm = facultySearch.value.toLowerCase();
+ const deptTerm = departmentFilter.value;
+ const genderTerm = genderFilter.value;
 
-  const filtered = allFaculty.filter((faculty) => {
-    const fullName = `${faculty.first_name} ${faculty.last_name} ${faculty.middle_initial ?? ""}`.toLowerCase();
-    const empNumber = (faculty.employee_number ?? "").toLowerCase();
-    
-    const matchesSearch = fullName.includes(searchValue) || empNumber.includes(searchValue);
-    const matchesDepartment = !selectedDepartment || faculty.department_name === selectedDepartment;
-    const matchesGender = !selectedGender || faculty.gender === selectedGender;
-    
-    return matchesSearch && matchesDepartment && matchesGender;
-  });
 
-  renderFaculty(filtered);
+ const filtered = allFaculty.filter(f => {
+   const matchesSearch = f.first_name.toLowerCase().includes(searchTerm) ||
+                         f.last_name.toLowerCase().includes(searchTerm) ||
+                         f.employee_number.toLowerCase().includes(searchTerm);
+   const matchesDept = !deptTerm || f.department_name === deptTerm;
+   const matchesGender = !genderTerm || f.gender === genderTerm;
+   return matchesSearch && matchesDept && matchesGender;
+ });
+ renderFaculty(filtered);
 }
 
-// Fetch the data from Django
+
 async function loadFaculty() {
-  try {
-    const response = await fetch(`${API_BASE_URL}/faculty/`);
-    if (!response.ok) throw new Error("Failed to fetch faculty");
-    
-    allFaculty = await response.json();
-    populateFilters(allFaculty);
-    renderFaculty(allFaculty);
-    
-  } catch (error) {
-    facultyTableBody.innerHTML = `
-      <tr>
-        <td colspan="5" class="px-6 py-10 text-center text-sm text-red-500">
-          Failed to load faculty directory. Ensure your Django server is running.
-        </td>
-      </tr>
-    `;
-    facultySummary.innerHTML = `Showing <span class="font-semibold">0</span> faculty members`;
-    console.error("Faculty load error:", error);
-  }
+   try {
+       const res = await fetch(`${API_BASE_URL}/faculty/`);
+       allFaculty = await res.json();
+       renderFaculty(allFaculty);
+   } catch(e) { console.error("Load failed", e); }
 }
 
-// Event Listeners
+
+// EVENT LISTENERS
 facultySearch.addEventListener("input", applyFilters);
 departmentFilter.addEventListener("change", applyFilters);
 genderFilter.addEventListener("change", applyFilters);
-
 resetFilters.addEventListener("click", () => {
-  facultySearch.value = "";
-  departmentFilter.value = "";
-  genderFilter.value = "";
-  renderFaculty(allFaculty);
+   facultySearch.value = "";
+   departmentFilter.value = "";
+   genderFilter.value = "";
+   renderFaculty(allFaculty);
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-  const themeToggle = document.getElementById('themeToggle');
-  const themeIcon = document.getElementById('themeIcon');
-  const htmlElement = document.documentElement;
 
-  // 1. Helper function to swap the icon based on the current theme
-  const updateIcon = () => {
-    if (htmlElement.classList.contains('dark')) {
-      themeIcon.textContent = 'light_mode'; // Shows a sun icon in dark mode
-    } else {
-      themeIcon.textContent = 'dark_mode';  // Shows a moon icon in light mode
-    }
-  };
-
-  // 2. Set the initial icon to match what theme-init.js decided
-  updateIcon();
-
-  // 3. Listen for the click event
-  themeToggle.addEventListener('click', () => {
-    // Toggle the 'dark' class on the <html> tag
-    htmlElement.classList.toggle('dark');
-    
-    // Check if dark mode is currently active after the toggle
-    const isDarkMode = htmlElement.classList.contains('dark');
-    
-    // Update localStorage so theme-init.js remembers it on reload
-    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-    
-    // Swap the icon to match the new state
-    updateIcon();
-  });
+document.addEventListener("DOMContentLoaded", () => {
+   loadDepartments();
+   loadFaculty();
+   document.getElementById("addFacultyBtn").onclick = () => openFacModal();
+   document.getElementById("closeModal").onclick = closeFacModal;
+   document.getElementById("cancelModal").onclick = closeFacModal;
 });
 
-// Initialize
-loadFaculty();
