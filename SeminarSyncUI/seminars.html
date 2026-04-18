@@ -6,8 +6,14 @@
     <title>SeminarSync Admin - Seminars</title>
     <script src="js/theme-init.js"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
     <script>
       tailwind.config = {
         darkMode: "class",
@@ -26,34 +32,61 @@
       };
     </script>
     <style>
-      body { font-family: "Inter", sans-serif; }
+      body {
+        font-family: "Inter", sans-serif;
+      }
       .material-symbols-outlined {
-        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
       }
     </style>
   </head>
-  <body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased transition-colors duration-200">
+  <body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased transition-colors duration-200"
+  >
     <div class="relative flex min-h-screen w-full flex-col">
-      
-      <header class="sticky top-0 z-40 flex h-16 w-full items-center justify-between border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md px-6">
+      <header
+        class="sticky top-0 z-40 flex h-16 w-full items-center justify-between border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md px-6"
+      >
         <div class="flex items-center gap-4">
           <div class="flex items-center gap-2 text-primary">
-            <span class="material-symbols-outlined text-3xl font-bold">event_available</span>
+            <span class="material-symbols-outlined text-3xl font-bold"
+              >event_available</span
+            >
             <h2 class="text-xl font-bold tracking-tight">SeminarSync</h2>
           </div>
           <div class="h-6 w-px bg-slate-200 dark:bg-slate-700 mx-2"></div>
-          <h1 class="text-sm font-semibold text-slate-600 dark:text-slate-400">Seminars</h1>
+          <h1 class="text-sm font-semibold text-slate-600 dark:text-slate-400">
+            Seminars
+          </h1>
         </div>
         <div class="flex items-center gap-4">
-          <button id="themeToggle" class="flex h-10 w-10 items-center justify-center rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
-            <span id="themeIcon" class="material-symbols-outlined text-slate-600 dark:text-slate-300">dark_mode</span>
+          <button
+            id="themeToggle"
+            class="flex h-10 w-10 items-center justify-center rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+            type="button"
+            aria-label="Toggle dark mode"
+            title="Toggle dark mode"
+          >
+            <span
+              id="themeIcon"
+              class="material-symbols-outlined text-slate-600 dark:text-slate-300"
+              >dark_mode</span
+            >
           </button>
-          <div class="flex items-center gap-3 pl-2 border-l border-slate-200 dark:border-slate-800">
+          <div
+            class="flex items-center gap-3 pl-2 border-l border-slate-200 dark:border-slate-800"
+          >
             <div class="flex flex-col items-end text-xs">
               <span class="font-bold">System Admin</span>
               <span class="text-slate-500">HR Office</span>
             </div>
-            <div class="h-10 w-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center overflow-hidden">
+            <div
+              class="h-10 w-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center overflow-hidden"
+            >
               <span class="material-symbols-outlined text-primary">person</span>
             </div>
           </div>
@@ -61,36 +94,68 @@
       </header>
 
       <div class="flex flex-1 overflow-hidden">
-        
-        <aside class="hidden lg:flex w-72 flex-col border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark p-4 overflow-y-auto">
+        <aside
+          class="hidden lg:flex w-72 flex-col border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark p-4 overflow-y-auto"
+        >
           <nav class="space-y-1">
-            <p class="px-3 text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2">Overview</p>
-            <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="admindashboard.html">
+            <p
+              class="px-3 text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2"
+            >
+              Overview
+            </p>
+            <a
+              class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+              href="admindashboard.html"
+            >
               <span class="material-symbols-outlined text-xl">grid_view</span>
               <span class="text-sm">Dashboard</span>
             </a>
-            
+
             <div class="pt-4 pb-2">
-              <p class="px-3 text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2">Records Management</p>
-              <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="faculty.html">
+              <p
+                class="px-3 text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2"
+              >
+                Records Management
+              </p>
+              <a
+                class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                href="faculty.html"
+              >
                 <span class="material-symbols-outlined text-lg">badge</span>
                 <span class="text-sm">Faculty Directory</span>
               </a>
-              <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="departments.html">
+              <a
+                class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                href="departments.html"
+              >
                 <span class="material-symbols-outlined text-lg">domain</span>
                 <span class="text-sm">Departments</span>
               </a>
-              
-              <a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary text-white font-medium" href="seminars.html">
-                <span class="material-symbols-outlined text-lg">calendar_month</span>
+
+              <a
+                class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary text-white font-medium"
+                href="seminars.html"
+              >
+                <span class="material-symbols-outlined text-lg"
+                  >calendar_month</span
+                >
                 <span class="text-sm">Seminars</span>
               </a>
             </div>
 
             <div class="pt-4 pb-2">
-              <p class="px-3 text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2">Operations</p>
-              <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="attendancelogs.html">
-                <span class="material-symbols-outlined text-xl">fact_check</span>
+              <p
+                class="px-3 text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2"
+              >
+                Operations
+              </p>
+              <a
+                class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                href="attendancelogs.html"
+              >
+                <span class="material-symbols-outlined text-xl"
+                  >fact_check</span
+                >
                 <span class="text-sm">Attendance Logs</span>
               </a>
             </div>
@@ -98,74 +163,242 @@
         </aside>
 
         <main class="flex-1 overflow-y-auto p-6 md:p-8 space-y-6">
-          
-          <div class="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-4">
+          <div
+            class="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-4"
+          >
             <div class="relative w-full xl:max-w-md">
-              <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">search</span>
-              <input id="seminarSearch" class="w-full pl-10 pr-4 py-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-sm focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none" placeholder="Search seminars by title or location..." type="text" />
+              <span
+                class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl"
+                >search</span
+              >
+              <input
+                id="seminarSearch"
+                class="w-full pl-10 pr-4 py-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-sm focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none"
+                placeholder="Search seminars by title or location..."
+                type="text"
+              />
             </div>
             <div class="flex items-center gap-3">
-              <button class="bg-primary hover:bg-primary/90 text-white px-4 py-3 rounded-xl text-sm font-bold flex items-center gap-2 transition-all shadow-sm">
-                <span class="material-symbols-outlined text-lg">add_circle</span>
+              <button
+                id="addSeminarBtn"
+                class="bg-primary hover:bg-primary/90 text-white px-4 py-3 rounded-xl text-sm font-bold flex items-center gap-2 transition-all shadow-sm"
+              >
+                <span class="material-symbols-outlined text-lg"
+                  >add_circle</span
+                >
                 <span>Schedule Seminar</span>
               </button>
             </div>
           </div>
 
-          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+          <div
+            class="flex flex-col lg:flex-row lg:items-center justify-between gap-4"
+          >
             <div>
-              <h2 class="text-2xl font-black tracking-tight">Seminars & Training</h2>
-              <p class="text-slate-500 text-sm mt-1">Manage all upcoming and past faculty development sessions.</p>
+              <h2 class="text-2xl font-black tracking-tight">
+                Seminars & Training
+              </h2>
+              <p class="text-slate-500 text-sm mt-1">
+                Manage all upcoming and past faculty development sessions.
+              </p>
             </div>
             <div class="flex flex-wrap gap-2">
-              <select id="statusFilter" class="px-3 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none">
+              <select
+                id="statusFilter"
+                class="px-3 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none"
+              >
                 <option value="">All Statuses</option>
                 <option value="upcoming">Upcoming</option>
                 <option value="completed">Completed</option>
               </select>
-              <button id="resetFilters" class="flex items-center gap-2 px-3 py-2 text-primary bg-primary/10 rounded-lg text-sm font-medium hover:bg-primary/20">
-                <span class="material-symbols-outlined text-lg">filter_list</span>
+              <button
+                id="resetFilters"
+                class="flex items-center gap-2 px-3 py-2 text-primary bg-primary/10 rounded-lg text-sm font-medium hover:bg-primary/20"
+              >
+                <span class="material-symbols-outlined text-lg"
+                  >filter_list</span
+                >
                 <span>Reset Filters</span>
               </button>
             </div>
           </div>
 
-          <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
+          <div
+            class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm"
+          >
             <div class="overflow-x-auto">
               <table class="w-full text-left border-collapse">
                 <thead>
-                  <tr class="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800">
-                    <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Seminar Info</th>
-                    <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Date & Location</th>
-                    <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Status</th>
-                    <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 text-right">Actions</th>
+                  <tr
+                    class="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800"
+                  >
+                    <th
+                      class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500"
+                    >
+                      Seminar Info
+                    </th>
+                    <th
+                      class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500"
+                    >
+                      Date & Location
+                    </th>
+                    <th
+                      class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500"
+                    >
+                      Status
+                    </th>
+                    <th
+                      class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 text-right"
+                    >
+                      Actions
+                    </th>
                   </tr>
                 </thead>
-                <tbody id="seminars-list" class="divide-y divide-slate-100 dark:divide-slate-800">
+                <tbody
+                  id="seminars-list"
+                  class="divide-y divide-slate-100 dark:divide-slate-800"
+                >
                   <tr>
-                    <td colspan="4" class="px-6 py-10 text-center text-sm text-slate-500">Loading seminar records...</td>
+                    <td
+                      colspan="4"
+                      class="px-6 py-10 text-center text-sm text-slate-500"
+                    >
+                      Loading seminar records...
+                    </td>
                   </tr>
                 </tbody>
               </table>
             </div>
-            
-            <div class="px-6 py-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/30 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <p id="seminarSummary" class="text-sm text-slate-500">Showing <span class="font-semibold" id="seminar-count">0</span> seminars</p>
+
+            <div
+              class="px-6 py-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/30 flex flex-col sm:flex-row items-center justify-between gap-4"
+            >
+              <p id="seminarSummary" class="text-sm text-slate-500">
+                Showing
+                <span class="font-semibold" id="seminar-count">0</span> seminars
+              </p>
               <div class="flex items-center gap-2">
-                <button class="p-2 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-400 opacity-50 cursor-not-allowed" disabled>
+                <button
+                  class="p-2 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-400 opacity-50 cursor-not-allowed"
+                  disabled
+                >
                   <span class="material-symbols-outlined">chevron_left</span>
                 </button>
-                <button class="px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold shadow-sm">1</button>
-                <button class="p-2 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-400 opacity-50 cursor-not-allowed" disabled>
+                <button
+                  class="px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold shadow-sm"
+                >
+                  1
+                </button>
+                <button
+                  class="p-2 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-400 opacity-50 cursor-not-allowed"
+                  disabled
+                >
                   <span class="material-symbols-outlined">chevron_right</span>
                 </button>
               </div>
             </div>
-
           </div>
         </main>
       </div>
     </div>
+    <div
+      id="seminarModal"
+      class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm hidden items-center justify-center z-50"
+    >
+      <div
+        class="bg-white dark:bg-slate-900 rounded-xl shadow-xl w-full max-w-md overflow-hidden transform transition-all"
+      >
+        <div
+          class="px-6 py-4 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center"
+        >
+          <h3
+            id="modalTitle"
+            class="text-lg font-bold text-slate-800 dark:text-white"
+          >
+            Edit Seminar
+          </h3>
+          <button
+            id="closeModal"
+            class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
+          >
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+
+        <form id="seminarForm" class="p-6">
+          <input type="hidden" id="seminarId" />
+
+          <div class="space-y-4">
+            <div>
+              <label
+                class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1"
+                >Title</label
+              >
+              <input
+                type="text"
+                id="formTitle"
+                required
+                class="w-full px-3 py-2 border border-slate-300 rounded-lg dark:bg-slate-800 dark:border-slate-700 dark:text-white"
+              />
+            </div>
+            <div>
+              <label
+                class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1"
+                >Description</label
+              >
+              <textarea
+                id="formDescription"
+                rows="2"
+                class="w-full px-3 py-2 border border-slate-300 rounded-lg dark:bg-slate-800 dark:border-slate-700 dark:text-white"
+              ></textarea>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label
+                  class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1"
+                  >Date</label
+                >
+                <input
+                  type="date"
+                  id="formDate"
+                  required
+                  class="w-full px-3 py-2 border border-slate-300 rounded-lg dark:bg-slate-800 dark:border-slate-700 dark:text-white"
+                />
+              </div>
+              <div>
+                <label
+                  class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1"
+                  >Location</label
+                >
+                <input
+                  type="text"
+                  id="formLocation"
+                  class="w-full px-3 py-2 border border-slate-300 rounded-lg dark:bg-slate-800 dark:border-slate-700 dark:text-white"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 flex justify-end gap-3">
+            <button
+              type="button"
+              id="cancelModal"
+              class="px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-lg dark:text-slate-300 dark:hover:bg-slate-800 transition-colors"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors"
+            >
+              Save Changes
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
     <script src="js/seminars.js"></script>
   </body>
 </html>
+
