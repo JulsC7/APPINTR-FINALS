@@ -9,8 +9,12 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function setupEventListeners() {
-  document.getElementById("departmentSearch").addEventListener("input", applyFilters);
-  document.getElementById("collegeFilter").addEventListener("change", applyFilters);
+  document
+    .getElementById("departmentSearch")
+    .addEventListener("input", applyFilters);
+  document
+    .getElementById("collegeFilter")
+    .addEventListener("change", applyFilters);
   document.getElementById("resetFilters").addEventListener("click", () => {
     document.getElementById("departmentSearch").value = "";
     document.getElementById("collegeFilter").value = "";
@@ -32,7 +36,7 @@ async function fetchDepartments() {
     renderDepartments(allDepartments);
   } catch (error) {
     console.error("Fetch error:", error);
-    document.getElementById("departments-list").innerHTML = 
+    document.getElementById("departments-list").innerHTML =
       `<tr><td colspan="3" class="px-6 py-8 text-center text-red-500">Server Error. Make sure Django is running at ${API_URL}</td></tr>`;
   }
 }
@@ -40,13 +44,14 @@ async function fetchDepartments() {
 function populateDropdowns(departments) {
   const filterDropdown = document.getElementById("collegeFilter");
   const modalDropdown = document.getElementById("collegeName");
-  const colleges = [...new Set(departments.map(d => d.college_name))].sort();
-  
-  filterDropdown.innerHTML = '<option value="">All Colleges</option>';
-  modalDropdown.innerHTML = '<option value="">Select a College</option><option value="N/A">Non-Academic (N/A)</option>';
+  const colleges = [...new Set(departments.map((d) => d.college_name))].sort();
 
-  colleges.forEach(c => {
-    if(c !== "N/A" && c !== "") {
+  filterDropdown.innerHTML = '<option value="">All Colleges</option>';
+  modalDropdown.innerHTML =
+    '<option value="">Select a College</option><option value="N/A">Non-Academic (N/A)</option>';
+
+  colleges.forEach((c) => {
+    if (c !== "N/A" && c !== "") {
       const opt = `<option value="${c}">${c}</option>`;
       filterDropdown.innerHTML += opt;
       modalDropdown.innerHTML += opt;
@@ -58,7 +63,7 @@ async function handleSave(e) {
   e.preventDefault();
   const payload = {
     name: document.getElementById("deptName").value,
-    college_name: document.getElementById("collegeName").value
+    college_name: document.getElementById("collegeName").value,
   };
 
   const method = editModeId ? "PUT" : "POST";
@@ -68,15 +73,17 @@ async function handleSave(e) {
     const res = await fetch(url, {
       method: method,
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(payload),
     });
     if (res.ok) {
       closeModal();
       fetchDepartments();
     } else {
-        alert("Failed to save. Check your server logs.");
+      alert("Failed to save. Check your server logs.");
     }
-  } catch (err) { console.error("Save error:", err); }
+  } catch (err) {
+    console.error("Save error:", err);
+  }
 }
 
 // FULLY UPDATED DELETE FUNCTION
@@ -87,12 +94,12 @@ async function deleteDept(id) {
   const deleteUrl = `${API_URL}${id}/`;
 
   try {
-    const res = await fetch(deleteUrl, { 
+    const res = await fetch(deleteUrl, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        "X-Requested-With": "XMLHttpRequest"
-      }
+        "X-Requested-With": "XMLHttpRequest",
+      },
     });
 
     if (res.ok) {
@@ -114,7 +121,7 @@ function openModal(id = null) {
   editModeId = id;
   const modal = document.getElementById("deptModal");
   const container = document.getElementById("modalContainer");
-  
+
   modal.classList.replace("hidden", "flex");
   setTimeout(() => {
     container.classList.replace("opacity-0", "opacity-100");
@@ -122,7 +129,7 @@ function openModal(id = null) {
   }, 10);
 
   if (id) {
-    const dept = allDepartments.find(d => d.id === id);
+    const dept = allDepartments.find((d) => d.id === id);
     document.getElementById("deptName").value = dept.name;
     document.getElementById("collegeName").value = dept.college_name;
     document.getElementById("modalTitle").innerText = "Edit Department";
@@ -143,15 +150,19 @@ function closeModal() {
 function renderDepartments(departments) {
   const list = document.getElementById("departments-list");
   document.getElementById("dept-count").textContent = departments.length;
-  list.innerHTML = departments.length ? "" : '<tr><td colspan="3" class="px-6 py-8 text-center italic text-slate-500">No records found.</td></tr>';
+  list.innerHTML = departments.length
+    ? ""
+    : '<tr><td colspan="3" class="px-6 py-8 text-center italic text-slate-500">No records found.</td></tr>';
 
-  departments.forEach(dept => {
+  departments.forEach((dept) => {
     const tr = document.createElement("tr");
-    tr.className = "hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors";
-    
-    const collegeDisplay = dept.college_name === "N/A" 
-      ? `<span class="bg-slate-100 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider border border-slate-200 dark:border-slate-700">Non-Academic</span>`
-      : `<span class="text-slate-600 dark:text-slate-400 font-medium">${dept.college_name}</span>`;
+    tr.className =
+      "hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors";
+
+    const collegeDisplay =
+      dept.college_name === "N/A"
+        ? `<span class="bg-slate-100 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider border border-slate-200 dark:border-slate-700">Non-Academic</span>`
+        : `<span class="text-slate-600 dark:text-slate-400 font-medium">${dept.college_name}</span>`;
 
     tr.innerHTML = `
       <td class="px-6 py-4 font-bold text-slate-800 dark:text-white">${dept.name}</td>
@@ -169,20 +180,41 @@ function renderDepartments(departments) {
 }
 
 function applyFilters() {
-  const search = document.getElementById("departmentSearch").value.toLowerCase();
+  const search = document
+    .getElementById("departmentSearch")
+    .value.toLowerCase();
   const college = document.getElementById("collegeFilter").value;
-  const filtered = allDepartments.filter(d => 
-    d.name.toLowerCase().includes(search) && (college === "" || d.college_name === college)
+  const filtered = allDepartments.filter(
+    (d) =>
+      d.name.toLowerCase().includes(search) &&
+      (college === "" || d.college_name === college),
   );
   renderDepartments(filtered);
 }
 
 function initTheme() {
-  const btn = document.getElementById("themeToggle");
-  const icon = document.getElementById("themeIcon");
-  if (!btn || !icon) return;
-  btn.onclick = () => {
-    document.documentElement.classList.toggle("dark");
-    icon.textContent = document.documentElement.classList.contains("dark") ? "light_mode" : "star";
+  const themeToggle = document.getElementById("themeToggle");
+  const themeIcon = document.getElementById("themeIcon");
+  const htmlElement = document.documentElement;
+
+  if (localStorage.getItem("theme") === "dark") {
+    htmlElement.classList.add("dark");
+  }
+
+  const updateIcon = () => {
+    themeIcon.textContent = htmlElement.classList.contains("dark")
+      ? "light_mode"
+      : "dark_mode";
   };
+
+  updateIcon();
+
+  themeToggle.addEventListener("click", () => {
+    htmlElement.classList.toggle("dark");
+    localStorage.setItem(
+      "theme",
+      htmlElement.classList.contains("dark") ? "dark" : "light",
+    );
+    updateIcon();
+  });
 }
