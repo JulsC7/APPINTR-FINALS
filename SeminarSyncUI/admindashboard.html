@@ -6,8 +6,14 @@
     <title>SeminarSync Admin Dashboard</title>
     <script src="js/theme-init.js"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
     <script>
       tailwind.config = {
         darkMode: "class",
@@ -26,30 +32,52 @@
       };
     </script>
   </head>
-  <body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased transition-colors duration-200">
+
+  <body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased transition-colors duration-200"
+  >
     <div class="relative flex min-h-screen w-full flex-col">
-      
-      <header class="sticky top-0 z-40 flex h-16 w-full items-center justify-between border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md px-6">
+      <header
+        class="sticky top-0 z-40 flex h-16 w-full items-center justify-between border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md px-6"
+      >
         <div class="flex items-center gap-4">
           <div class="flex items-center gap-2 text-primary">
-            <span class="material-symbols-outlined text-3xl font-bold">event_available</span>
+            <span class="material-symbols-outlined text-3xl font-bold"
+              >event_available</span
+            >
             <h2 class="text-xl font-bold tracking-tight">SeminarSync</h2>
           </div>
           <div class="h-6 w-px bg-slate-200 dark:bg-slate-700 mx-2"></div>
-          <h1 class="text-sm font-semibold text-slate-600 dark:text-slate-400">Admin Dashboard</h1>
+          <h1 class="text-sm font-semibold text-slate-600 dark:text-slate-400">
+            Admin Dashboard
+          </h1>
         </div>
-        
+
         <div class="flex items-center gap-4">
-          <button id="themeToggle" class="flex h-10 w-10 items-center justify-center rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
-            <span id="themeIcon" class="material-symbols-outlined text-slate-600 dark:text-slate-300">dark_mode</span>
+          <button
+            id="themeToggle"
+            class="flex h-10 w-10 items-center justify-center rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+            type="button"
+            aria-label="Toggle dark mode"
+            title="Toggle dark mode"
+          >
+            <span
+              id="themeIcon"
+              class="material-symbols-outlined text-slate-600 dark:text-slate-300"
+              >dark_mode</span
+            >
           </button>
-          
-          <div class="flex items-center gap-3 pl-2 border-l border-slate-200 dark:border-slate-800">
+
+          <div
+            class="flex items-center gap-3 pl-2 border-l border-slate-200 dark:border-slate-800"
+          >
             <div class="flex flex-col items-end text-xs">
               <span class="font-bold">System Admin</span>
               <span class="text-slate-500">HR Office</span>
             </div>
-            <div class="h-10 w-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center overflow-hidden">
+            <div
+              class="h-10 w-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center overflow-hidden"
+            >
               <span class="material-symbols-outlined text-primary">person</span>
             </div>
           </div>
@@ -57,39 +85,71 @@
       </header>
 
       <div class="flex flex-1 overflow-hidden">
-        
-        <aside class="hidden lg:flex w-72 flex-col border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark p-4 overflow-y-auto">
+        <aside
+          class="hidden lg:flex w-72 flex-col border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark p-4 overflow-y-auto"
+        >
           <nav class="space-y-1">
-            <p class="px-3 text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2">Overview</p>
-            <a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary text-white font-medium" href="admindashboard.html">
+            <p
+              class="px-3 text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2"
+            >
+              Overview
+            </p>
+            <a
+              class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary text-white font-medium"
+              href="admindashboard.html"
+            >
               <span class="material-symbols-outlined text-xl">grid_view</span>
               <span class="text-sm">Dashboard</span>
             </a>
-            
+
             <div class="pt-4 pb-2">
-              <p class="px-3 text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2">Records Management</p>
-              
-              <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="faculty.html">
+              <p
+                class="px-3 text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2"
+              >
+                Records Management
+              </p>
+
+              <a
+                class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                href="faculty.html"
+              >
                 <span class="material-symbols-outlined text-lg">badge</span>
-                <span>Faculty</span>
+                <span>Faculty Directory</span>
               </a>
-              
-              <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="departments.html">
+
+              <a
+                class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                href="departments.html"
+              >
                 <span class="material-symbols-outlined text-lg">domain</span>
                 <span>Departments</span>
               </a>
-              
-              <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="seminars.html">
-                <span class="material-symbols-outlined text-lg">calendar_month</span>
+
+              <a
+                class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                href="seminars.html"
+              >
+                <span class="material-symbols-outlined text-lg"
+                  >calendar_month</span
+                >
                 <span>Seminars</span>
               </a>
             </div>
 
             <div class="pt-4 pb-2">
-              <p class="px-3 text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2">Operations</p>
-              
-              <a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors" href="attendancelogs.html">
-                <span class="material-symbols-outlined text-xl">fact_check</span>
+              <p
+                class="px-3 text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2"
+              >
+                Operations
+              </p>
+
+              <a
+                class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors"
+                href="attendancelogs.html"
+              >
+                <span class="material-symbols-outlined text-xl"
+                  >fact_check</span
+                >
                 <span class="text-sm">Attendance Logs</span>
               </a>
             </div>
@@ -97,35 +157,54 @@
         </aside>
 
         <main class="flex-1 overflow-y-auto p-6 md:p-8 space-y-8">
-          
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+            <div
+              class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm"
+            >
               <div class="flex items-center justify-between mb-2">
-                <span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg">group</span>
+                <span
+                  class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg"
+                  >group</span
+                >
               </div>
               <p class="text-sm text-slate-500">Total Faculty</p>
               <p class="text-2xl font-bold" id="stat-faculty">--</p>
             </div>
-            
-            <div class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+
+            <div
+              class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm"
+            >
               <div class="flex items-center justify-between mb-2">
-                <span class="material-symbols-outlined text-emerald-500 bg-emerald-500/10 p-2 rounded-lg">local_library</span>
+                <span
+                  class="material-symbols-outlined text-emerald-500 bg-emerald-500/10 p-2 rounded-lg"
+                  >local_library</span
+                >
               </div>
               <p class="text-sm text-slate-500">Active Seminars</p>
               <p class="text-2xl font-bold" id="stat-seminars">--</p>
             </div>
-            
-            <div class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+
+            <div
+              class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm"
+            >
               <div class="flex items-center justify-between mb-2">
-                <span class="material-symbols-outlined text-blue-500 bg-blue-500/10 p-2 rounded-lg">domain</span>
+                <span
+                  class="material-symbols-outlined text-blue-500 bg-blue-500/10 p-2 rounded-lg"
+                  >domain</span
+                >
               </div>
               <p class="text-sm text-slate-500">Departments</p>
               <p class="text-2xl font-bold" id="stat-departments">--</p>
             </div>
-            
-            <div class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+
+            <div
+              class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm"
+            >
               <div class="flex items-center justify-between mb-2">
-                <span class="material-symbols-outlined text-amber-500 bg-amber-500/10 p-2 rounded-lg">checklist</span>
+                <span
+                  class="material-symbols-outlined text-amber-500 bg-amber-500/10 p-2 rounded-lg"
+                  >checklist</span
+                >
               </div>
               <p class="text-sm text-slate-500">Total Attendances Logged</p>
               <p class="text-2xl font-bold" id="stat-attendances">--</p>
@@ -134,14 +213,22 @@
 
           <div class="grid grid-cols-1 xl:grid-cols-4 gap-6">
             <div class="xl:col-span-3 space-y-6">
-              <div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
-                <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+              <div
+                class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden"
+              >
+                <div
+                  class="px-6 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between"
+                >
                   <h3 class="font-bold">Recent Attendance Logs</h3>
-                  <button class="text-xs text-primary font-bold" type="button">Refresh Data</button>
+                  <button class="text-xs text-primary font-bold" type="button">
+                    Refresh Data
+                  </button>
                 </div>
                 <div class="overflow-x-auto">
                   <table class="w-full text-left text-sm">
-                    <thead class="bg-slate-50 dark:bg-slate-800/50 text-slate-500 font-semibold uppercase text-[10px] tracking-wider">
+                    <thead
+                      class="bg-slate-50 dark:bg-slate-800/50 text-slate-500 font-semibold uppercase text-[10px] tracking-wider"
+                    >
                       <tr>
                         <th class="px-6 py-3">Faculty Member</th>
                         <th class="px-6 py-3">Seminar Title</th>
@@ -149,8 +236,18 @@
                         <th class="px-6 py-3 text-right">Status</th>
                       </tr>
                     </thead>
-                    <tbody id="attendance-body" class="divide-y divide-slate-100 dark:divide-slate-800">
-                      <tr><td colspan="4" class="px-6 py-4 text-center text-slate-500 italic">Waiting for JavaScript data...</td></tr>
+                    <tbody
+                      id="attendance-body"
+                      class="divide-y divide-slate-100 dark:divide-slate-800"
+                    >
+                      <tr>
+                        <td
+                          colspan="4"
+                          class="px-6 py-4 text-center text-slate-500 italic"
+                        >
+                          Waiting for JavaScript data...
+                        </td>
+                      </tr>
                     </tbody>
                   </table>
                 </div>
@@ -158,18 +255,27 @@
             </div>
 
             <div class="xl:col-span-1 space-y-6">
-              <div class="bg-white dark:bg-slate-900 rounded-xl border border-primary/20 shadow-sm overflow-hidden">
-                <div class="bg-primary/10 px-4 py-3 flex items-center gap-2 text-primary">
-                  <span class="material-symbols-outlined text-sm">notifications_active</span>
-                  <h3 class="text-sm font-bold uppercase tracking-wider">Upcoming Seminars</h3>
+              <div
+                class="bg-white dark:bg-slate-900 rounded-xl border border-primary/20 shadow-sm overflow-hidden"
+              >
+                <div
+                  class="bg-primary/10 px-4 py-3 flex items-center gap-2 text-primary"
+                >
+                  <span class="material-symbols-outlined text-sm"
+                    >notifications_active</span
+                  >
+                  <h3 class="text-sm font-bold uppercase tracking-wider">
+                    Upcoming Seminars
+                  </h3>
                 </div>
                 <div class="p-4 space-y-4" id="upcoming-seminars">
-                  <p class="text-xs text-slate-500 text-center">Loading schedules...</p>
+                  <p class="text-xs text-slate-500 text-center">
+                    Loading schedules...
+                  </p>
                 </div>
               </div>
             </div>
           </div>
-          
         </main>
       </div>
     </div>
