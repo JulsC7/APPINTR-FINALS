@@ -1,16 +1,16 @@
 const API_BASE_URL = "http://127.0.0.1:8000/api";
 
-document.addEventListener('DOMContentLoaded', () => {
-  const themeToggle = document.getElementById('themeToggle');
-  const themeIcon = document.getElementById('themeIcon');
+document.addEventListener("DOMContentLoaded", () => {
+  const themeToggle = document.getElementById("themeToggle");
+  const themeIcon = document.getElementById("themeIcon");
   const htmlElement = document.documentElement;
 
   // 1. Helper function to swap the icon based on the current theme
   const updateIcon = () => {
-    if (htmlElement.classList.contains('dark')) {
-      themeIcon.textContent = 'light_mode'; // Shows a sun icon in dark mode
+    if (htmlElement.classList.contains("dark")) {
+      themeIcon.textContent = "light_mode"; // Shows a sun icon in dark mode
     } else {
-      themeIcon.textContent = 'dark_mode';  // Shows a moon icon in light mode
+      themeIcon.textContent = "dark_mode"; // Shows a moon icon in light mode
     }
   };
 
@@ -18,16 +18,16 @@ document.addEventListener('DOMContentLoaded', () => {
   updateIcon();
 
   // 3. Listen for the click event
-  themeToggle.addEventListener('click', () => {
+  themeToggle.addEventListener("click", () => {
     // Toggle the 'dark' class on the <html> tag
-    htmlElement.classList.toggle('dark');
-    
+    htmlElement.classList.toggle("dark");
+
     // Check if dark mode is currently active after the toggle
-    const isDarkMode = htmlElement.classList.contains('dark');
-    
+    const isDarkMode = htmlElement.classList.contains("dark");
+
     // Update localStorage so theme-init.js remembers it on reload
-    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-    
+    localStorage.setItem("theme", isDarkMode ? "dark" : "light");
+
     // Swap the icon to match the new state
     updateIcon();
   });
@@ -41,23 +41,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 2. Refresh Button Logic (Optional extra)
   const refreshBtn = document.querySelector("button[type='button']");
-  if(refreshBtn && refreshBtn.innerText === "Refresh Data") {
-      refreshBtn.addEventListener("click", () => {
-          loadRecentAttendance();
-          loadDashboardStats();
-      });
+  if (refreshBtn && refreshBtn.innerText === "Refresh Data") {
+    refreshBtn.addEventListener("click", () => {
+      loadRecentAttendance();
+      loadDashboardStats();
+    });
   }
 });
 
 // Fetch all counts for the top stat cards
 async function loadDashboardStats() {
   try {
-    const [facultyRes, seminarsRes, deptsRes, attendanceRes] = await Promise.all([
-      fetch(`${API_BASE_URL}/faculty/`),
-      fetch(`${API_BASE_URL}/seminars/`),
-      fetch(`${API_BASE_URL}/departments/`),
-      fetch(`${API_BASE_URL}/attendance-records/`)
-    ]);
+    const [facultyRes, seminarsRes, deptsRes, attendanceRes] =
+      await Promise.all([
+        fetch(`${API_BASE_URL}/faculty/`),
+        fetch(`${API_BASE_URL}/seminars/`),
+        fetch(`${API_BASE_URL}/departments/`),
+        fetch(`${API_BASE_URL}/attendance-records/`),
+      ]);
 
     const faculty = await facultyRes.json();
     const seminars = await seminarsRes.json();
@@ -68,8 +69,8 @@ async function loadDashboardStats() {
     document.getElementById("stat-faculty").innerText = faculty.length || 0;
     document.getElementById("stat-seminars").innerText = seminars.length || 0;
     document.getElementById("stat-departments").innerText = depts.length || 0;
-    document.getElementById("stat-attendances").innerText = attendances.length || 0;
-
+    document.getElementById("stat-attendances").innerText =
+      attendances.length || 0;
   } catch (error) {
     console.error("Error loading stats:", error);
   }
@@ -78,7 +79,7 @@ async function loadDashboardStats() {
 // Fetch and display the table records
 async function loadRecentAttendance() {
   const tableBody = document.getElementById("attendance-body");
-  
+
   try {
     const response = await fetch(`${API_BASE_URL}/attendance-records/`);
     const records = await response.json();
@@ -93,9 +94,9 @@ async function loadRecentAttendance() {
     // Display up to 5 most recent records
     const recentRecords = records.slice(0, 5);
 
-    recentRecords.forEach(record => {
+    recentRecords.forEach((record) => {
       const dateLogged = new Date(record.time_logged).toLocaleString();
-      
+
       tableBody.innerHTML += `
         <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
           <td class="px-6 py-4 flex items-center gap-3">
@@ -121,7 +122,6 @@ async function loadRecentAttendance() {
         </tr>
       `;
     });
-
   } catch (error) {
     console.error("Error loading attendance:", error);
     tableBody.innerHTML = `<tr><td colspan="4" class="px-6 py-4 text-center text-red-500">Error connecting to Django API.</td></tr>`;
@@ -130,36 +130,40 @@ async function loadRecentAttendance() {
 
 // Fetch and display seminars in the side panel
 async function loadUpcomingSeminars() {
-    const seminarContainer = document.getElementById("upcoming-seminars");
+  const seminarContainer = document.getElementById("upcoming-seminars");
 
-    try {
-        const response = await fetch(`${API_BASE_URL}/seminars/`);
-        const seminars = await response.json();
+  try {
+    const response = await fetch(`${API_BASE_URL}/seminars/`);
+    const seminars = await response.json();
 
-        seminarContainer.innerHTML = "";
+    seminarContainer.innerHTML = "";
 
-        if (!seminars.length) {
-            seminarContainer.innerHTML = `<p class="text-xs text-slate-500 text-center">No seminars scheduled.</p>`;
-            return;
-        }
+    if (!seminars.length) {
+      seminarContainer.innerHTML = `<p class="text-xs text-slate-500 text-center">No seminars scheduled.</p>`;
+      return;
+    }
 
-        seminars.forEach(seminar => {
-            const seminarDate = new Date(seminar.date).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
-            
-            seminarContainer.innerHTML += `
+    seminars.forEach((seminar) => {
+      const seminarDate = new Date(seminar.date).toLocaleDateString(undefined, {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      });
+
+      seminarContainer.innerHTML += `
                 <div class="p-3 bg-blue-50 dark:bg-blue-900/10 rounded-lg border border-blue-100 dark:border-blue-900/30 flex gap-3">
                   <span class="material-symbols-outlined text-primary text-xl shrink-0">event</span>
                   <div>
                     <p class="text-xs font-bold text-primary dark:text-blue-400">${seminar.title}</p>
-                    <p class="text-[10px] text-slate-600 dark:text-slate-400 mt-1">Location: ${seminar.location || 'TBA'}</p>
+                    <p class="text-[10px] text-slate-600 dark:text-slate-400 mt-1">Location: ${seminar.location || "TBA"}</p>
                     <p class="text-[10px] text-slate-600 dark:text-slate-400 font-bold mt-1">Date: ${seminarDate}</p>
                   </div>
                 </div>
             `;
-        });
-
-    } catch (error) {
-        console.error("Error loading seminars:", error);
-        seminarContainer.innerHTML = `<p class="text-xs text-red-500 text-center">Failed to load seminars.</p>`;
-    }
+    });
+  } catch (error) {
+    console.error("Error loading seminars:", error);
+    seminarContainer.innerHTML = `<p class="text-xs text-red-500 text-center">Failed to load seminars.</p>`;
+  }
 }
+
