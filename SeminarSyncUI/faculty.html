@@ -1,206 +1,411 @@
 <!doctype html>
 <html lang="en" class="light">
- <head>
-   <meta charset="utf-8" />
-   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-   <title>SeminarSync Admin - Faculty Directory</title>
-   <script src="js/theme-init.js"></script>
-   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
-   <script>
-     tailwind.config = {
-       darkMode: "class",
-       theme: {
-         extend: {
-           colors: {
-             primary: "#1e40af",
-             "background-light": "#f6f6f8",
-             "background-dark": "#131022",
-           },
-           fontFamily: { display: ["Inter", "sans-serif"] },
-         },
-       },
-     };
-   </script>
-   <style>
-     body { font-family: "Inter", sans-serif; }
-     .material-symbols-outlined { font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24; }
-   </style>
- </head>
- <body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased transition-colors duration-200">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>SeminarSync Admin - Faculty Directory</title>
+    <script src="js/theme-init.js"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#1e40af",
+              "background-light": "#f6f6f8",
+              "background-dark": "#131022",
+            },
+            fontFamily: { display: ["Inter", "sans-serif"] },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased transition-colors duration-200"
+  >
     <div class="relative flex min-h-screen w-full flex-col">
-      
-      <header class="sticky top-0 z-40 flex h-16 w-full items-center justify-between border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md px-6">
+      <header
+        class="sticky top-0 z-40 flex h-16 w-full items-center justify-between border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md px-6"
+      >
         <div class="flex items-center gap-4">
           <div class="flex items-center gap-2 text-primary">
-            <span class="material-symbols-outlined text-3xl font-bold">event_available</span>
+            <span class="material-symbols-outlined text-3xl font-bold"
+              >event_available</span
+            >
             <h2 class="text-xl font-bold tracking-tight">SeminarSync</h2>
           </div>
           <div class="h-6 w-px bg-slate-200 dark:bg-slate-700 mx-2"></div>
-          <h1 class="text-sm font-semibold text-slate-600 dark:text-slate-400">Faculty Directory</h1>
+          <h1 class="text-sm font-semibold text-slate-600 dark:text-slate-400">
+            Faculty Directory
+          </h1>
         </div>
         <div class="flex items-center gap-4">
-          <button id="themeToggle" class="flex h-10 w-10 items-center justify-center rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
-            <span id="themeIcon" class="material-symbols-outlined text-slate-600 dark:text-slate-300">dark_mode</span>
+          <button
+            id="themeToggle"
+            class="flex h-10 w-10 items-center justify-center rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+            type="button"
+            aria-label="Toggle dark mode"
+            title="Toggle dark mode"
+          >
+            <span
+              id="themeIcon"
+              class="material-symbols-outlined text-slate-600 dark:text-slate-300"
+              >dark_mode</span
+            >
           </button>
-          <div class="flex items-center gap-3 pl-2 border-l border-slate-200 dark:border-slate-800">
+          <div
+            class="flex items-center gap-3 pl-2 border-l border-slate-200 dark:border-slate-800"
+          >
             <div class="flex flex-col items-end text-xs">
               <span class="font-bold">System Admin</span>
               <span class="text-slate-500">HR Office</span>
             </div>
-            <div class="h-10 w-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center overflow-hidden">
+            <div
+              class="h-10 w-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center overflow-hidden"
+            >
               <span class="material-symbols-outlined text-primary">person</span>
             </div>
           </div>
         </div>
       </header>
 
+      <div class="flex flex-1 overflow-hidden">
+        <aside
+          class="hidden lg:flex w-72 flex-col border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark p-4 overflow-y-auto"
+        >
+          <nav class="space-y-1">
+            <p
+              class="px-3 text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2"
+            >
+              Overview
+            </p>
+            <a
+              class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+              href="admindashboard.html"
+            >
+              <span class="material-symbols-outlined text-xl">grid_view</span>
+              <span class="text-sm">Dashboard</span>
+            </a>
 
-     <div class="flex flex-1 overflow-hidden">
-       <aside class="hidden lg:flex w-72 flex-col border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark p-4 overflow-y-auto">
-         <nav class="space-y-1">
-           <p class="px-3 text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2">Overview</p>
-           <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="admindashboard.html">
-             <span class="material-symbols-outlined text-xl">grid_view</span>
-             <span class="text-sm">Dashboard</span>
-           </a>
-          
-           <div class="pt-4 pb-2">
-             <p class="px-3 text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2">Records Management</p>
-             <a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary text-white font-medium" href="faculty.html">
-               <span class="material-symbols-outlined text-lg">badge</span>
-               <span class="text-sm">Faculty Directory</span>
-             </a>
-             <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="departments.html">
-               <span class="material-symbols-outlined text-lg">domain</span>
-               <span class="text-sm">Departments</span>
-             </a>
-             <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="seminars.html">
-               <span class="material-symbols-outlined text-lg">calendar_month</span>
-               <span class="text-sm">Seminars</span>
-             </a>
-           </div>
+            <div class="pt-4 pb-2">
+              <p
+                class="px-3 text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2"
+              >
+                Records Management
+              </p>
+              <a
+                class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary text-white font-medium"
+                href="faculty.html"
+              >
+                <span class="material-symbols-outlined text-lg">badge</span>
+                <span class="text-sm">Faculty Directory</span>
+              </a>
+              <a
+                class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                href="departments.html"
+              >
+                <span class="material-symbols-outlined text-lg">domain</span>
+                <span class="text-sm">Departments</span>
+              </a>
+              <a
+                class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                href="seminars.html"
+              >
+                <span class="material-symbols-outlined text-lg"
+                  >calendar_month</span
+                >
+                <span class="text-sm">Seminars</span>
+              </a>
+            </div>
 
+            <div class="pt-4 pb-2">
+              <p
+                class="px-3 text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2"
+              >
+                Operations
+              </p>
+              <a
+                class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                href="attendancelogs.html"
+              >
+                <span class="material-symbols-outlined text-xl"
+                  >fact_check</span
+                >
+                <span class="text-sm">Attendance Logs</span>
+              </a>
+            </div>
+          </nav>
+        </aside>
 
-           <div class="pt-4 pb-2">
-             <p class="px-3 text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2">Operations</p>
-             <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="attendancelogs.html">
-               <span class="material-symbols-outlined text-xl">fact_check</span>
-               <span class="text-sm">Attendance Logs</span>
-             </a>
-           </div>
-         </nav>
-       </aside>
+        <main class="flex-1 overflow-y-auto p-6 md:p-8 space-y-6">
+          <div
+            class="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-4"
+          >
+            <div class="relative w-full xl:max-w-md">
+              <span
+                class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl"
+                >search</span
+              >
+              <input
+                id="facultySearch"
+                class="w-full pl-10 pr-4 py-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-sm outline-none"
+                placeholder="Search by name or employee number..."
+                type="text"
+              />
+            </div>
+            <button
+              id="addFacultyBtn"
+              class="bg-primary hover:bg-primary/90 text-white px-4 py-3 rounded-xl text-sm font-bold flex items-center gap-2 transition-all shadow-sm"
+            >
+              <span class="material-symbols-outlined text-lg">person_add</span>
+              <span>Add Faculty Member</span>
+            </button>
+          </div>
 
+          <div
+            class="flex flex-col lg:flex-row lg:items-center justify-between gap-4"
+          >
+            <div>
+              <h2 class="text-2xl font-black tracking-tight">
+                Faculty Directory
+              </h2>
+              <p class="text-slate-500 text-sm mt-1">
+                Manage all registered faculty and staff members.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <select
+                id="departmentFilter"
+                class="px-3 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none"
+              >
+                <option value="">All Departments</option>
+              </select>
+              <select
+                id="genderFilter"
+                class="px-3 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none"
+              >
+                <option value="">All Genders</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+              <button
+                id="resetFilters"
+                class="flex items-center gap-2 px-3 py-2 text-primary bg-primary/10 rounded-lg text-sm font-medium hover:bg-primary/20"
+              >
+                <span class="material-symbols-outlined text-lg"
+                  >filter_list</span
+                >
+                <span>Reset Filters</span>
+              </button>
+            </div>
+          </div>
 
-       <main class="flex-1 overflow-y-auto p-6 md:p-8 space-y-6">
-         <div class="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-4">
-           <div class="relative w-full xl:max-w-md">
-             <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">search</span>
-             <input id="facultySearch" class="w-full pl-10 pr-4 py-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-sm outline-none" placeholder="Search by name or employee number..." type="text" />
-           </div>
-           <button id="addFacultyBtn" class="bg-primary hover:bg-primary/90 text-white px-4 py-3 rounded-xl text-sm font-bold flex items-center gap-2 transition-all shadow-sm">
-             <span class="material-symbols-outlined text-lg">person_add</span>
-             <span>Add Faculty Member</span>
-           </button>
-         </div>
+          <div
+            class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm"
+          >
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse">
+                <thead>
+                  <tr
+                    class="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800"
+                  >
+                    <th
+                      class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500"
+                    >
+                      Faculty Info
+                    </th>
+                    <th
+                      class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500"
+                    >
+                      Department
+                    </th>
+                    <th
+                      class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500"
+                    >
+                      Contact Info
+                    </th>
+                    <th
+                      class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500"
+                    >
+                      Demographics
+                    </th>
+                    <th
+                      class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 text-right"
+                    >
+                      Actions
+                    </th>
+                  </tr>
+                </thead>
+                <tbody
+                  id="facultyTableBody"
+                  class="divide-y divide-slate-100 dark:divide-slate-800"
+                >
+                  <tr>
+                    <td
+                      colspan="5"
+                      class="px-6 py-10 text-center text-sm text-slate-500"
+                    >
+                      Loading faculty records...
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div
+              class="px-6 py-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/30"
+            >
+              <p id="facultySummary" class="text-sm text-slate-500">
+                Showing 0 faculty members
+              </p>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
 
-
-         <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-           <div>
-             <h2 class="text-2xl font-black tracking-tight">Faculty Directory</h2>
-             <p class="text-slate-500 text-sm mt-1">Manage all registered faculty and staff members.</p>
-           </div>
-           <div class="flex flex-wrap gap-2">
-             <select id="departmentFilter" class="px-3 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none">
-               <option value="">All Departments</option>
-             </select>
-             <select id="genderFilter" class="px-3 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none">
-               <option value="">All Genders</option>
-               <option value="Male">Male</option>
-               <option value="Female">Female</option>
-             </select>
-             <button id="resetFilters" class="flex items-center gap-2 px-3 py-2 text-primary bg-primary/10 rounded-lg text-sm font-medium hover:bg-primary/20">
-               <span class="material-symbols-outlined text-lg">filter_list</span>
-               <span>Reset Filters</span>
-             </button>
-           </div>
-         </div>
-
-
-         <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
-           <div class="overflow-x-auto">
-             <table class="w-full text-left border-collapse">
-               <thead>
-                 <tr class="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800">
-                   <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Faculty Info</th>
-                   <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Department</th>
-                   <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Contact Info</th>
-                   <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Demographics</th>
-                   <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 text-right">Actions</th>
-                 </tr>
-               </thead>
-               <tbody id="facultyTableBody" class="divide-y divide-slate-100 dark:divide-slate-800">
-                 <tr><td colspan="5" class="px-6 py-10 text-center text-sm text-slate-500">Loading faculty records...</td></tr>
-               </tbody>
-             </table>
-           </div>
-           <div class="px-6 py-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/30">
-             <p id="facultySummary" class="text-sm text-slate-500">Showing 0 faculty members</p>
-           </div>
-         </div>
-       </main>
-     </div>
-   </div>
-
-
-   <div id="facultyModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
-     <div id="modalContainer" class="w-full max-w-2xl bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 scale-95 opacity-0 transition-all duration-200">
-       <div class="px-6 py-4 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/50">
-         <h3 id="modalTitle" class="text-lg font-bold">Faculty Member</h3>
-         <button id="closeModal" class="material-symbols-outlined text-slate-400">close</button>
-       </div>
-       <form id="facultyForm" class="p-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-         <input type="hidden" id="facId">
-         <div class="md:col-span-2">
-           <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Upload Profile Photo</label>
-           <input type="file" id="facPhoto" accept="image/*" class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:bg-primary/10 file:text-primary hover:file:bg-primary/20">
-         </div>
-         <div>
-           <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Employee ID</label>
-           <input type="text" id="facEmpNum" required class="w-full rounded-lg border-slate-200 dark:bg-slate-800 dark:border-slate-700 text-sm">
-         </div>
-         <div>
-           <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Email</label>
-           <input type="email" id="facEmail" required class="w-full rounded-lg border-slate-200 dark:bg-slate-800 dark:border-slate-700 text-sm">
-         </div>
-         <div>
-           <label class="block text-xs font-bold uppercase text-slate-500 mb-1">First Name</label>
-           <input type="text" id="facFirstName" required class="w-full rounded-lg border-slate-200 dark:bg-slate-800 dark:border-slate-700 text-sm">
-         </div>
-         <div>
-           <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Last Name</label>
-           <input type="text" id="facLastName" required class="w-full rounded-lg border-slate-200 dark:bg-slate-800 dark:border-slate-700 text-sm">
-         </div>
-         <div>
-           <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Department</label>
-           <select id="facDept" class="w-full rounded-lg border-slate-200 dark:bg-slate-800 dark:border-slate-700 text-sm"></select>
-         </div>
-         <div>
-           <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Gender</label>
-           <select id="facGender" class="w-full rounded-lg border-slate-200 dark:bg-slate-800 dark:border-slate-700 text-sm">
-               <option value="Male">Male</option>
-               <option value="Female">Female</option>
-           </select>
-         </div>
-         <div class="md:col-span-2 flex justify-end gap-3 pt-4 mt-2 border-t border-slate-100 dark:border-slate-800">
-           <button type="button" id="cancelModal" class="px-4 py-2 text-sm text-slate-500 font-bold">Cancel</button>
-           <button type="submit" class="px-6 py-2 bg-primary text-white rounded-lg text-sm font-bold shadow-lg">Save Record</button>
-         </div>
-       </form>
-     </div>
-   </div>
-   <script src="js/faculty.js"></script>
- </body>
+    <div
+      id="facultyModal"
+      class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4"
+    >
+      <div
+        id="modalContainer"
+        class="w-full max-w-2xl bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 scale-95 opacity-0 transition-all duration-200"
+      >
+        <div
+          class="px-6 py-4 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/50"
+        >
+          <h3 id="modalTitle" class="text-lg font-bold">Faculty Member</h3>
+          <button
+            id="closeModal"
+            class="material-symbols-outlined text-slate-400"
+          >
+            close
+          </button>
+        </div>
+        <form
+          id="facultyForm"
+          class="p-6 grid grid-cols-1 md:grid-cols-2 gap-4"
+        >
+          <input type="hidden" id="facId" />
+          <div class="md:col-span-2">
+            <label class="block text-xs font-bold uppercase text-slate-500 mb-1"
+              >Upload Profile Photo</label
+            >
+            <input
+              type="file"
+              id="facPhoto"
+              accept="image/*"
+              class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:bg-primary/10 file:text-primary hover:file:bg-primary/20"
+            />
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-500 mb-1"
+              >Employee ID</label
+            >
+            <input
+              type="text"
+              id="facEmpNum"
+              required
+              class="w-full rounded-lg border-slate-200 dark:bg-slate-800 dark:border-slate-700 text-sm"
+            />
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-500 mb-1"
+              >Email</label
+            >
+            <input
+              type="email"
+              id="facEmail"
+              required
+              class="w-full rounded-lg border-slate-200 dark:bg-slate-800 dark:border-slate-700 text-sm"
+            />
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-500 mb-1"
+              >First Name</label
+            >
+            <input
+              type="text"
+              id="facFirstName"
+              required
+              class="w-full rounded-lg border-slate-200 dark:bg-slate-800 dark:border-slate-700 text-sm"
+            />
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-500 mb-1"
+              >Last Name</label
+            >
+            <input
+              type="text"
+              id="facLastName"
+              required
+              class="w-full rounded-lg border-slate-200 dark:bg-slate-800 dark:border-slate-700 text-sm"
+            />
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-500 mb-1"
+              >Department</label
+            >
+            <select
+              id="facDept"
+              class="w-full rounded-lg border-slate-200 dark:bg-slate-800 dark:border-slate-700 text-sm"
+            ></select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-500 mb-1"
+              >Gender</label
+            >
+            <select
+              id="facGender"
+              class="w-full rounded-lg border-slate-200 dark:bg-slate-800 dark:border-slate-700 text-sm"
+            >
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+          </div>
+          <div
+            class="md:col-span-2 flex justify-end gap-3 pt-4 mt-2 border-t border-slate-100 dark:border-slate-800"
+          >
+            <button
+              type="button"
+              id="cancelModal"
+              class="px-4 py-2 text-sm text-slate-500 font-bold"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="px-6 py-2 bg-primary text-white rounded-lg text-sm font-bold shadow-lg"
+            >
+              Save Record
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script src="js/faculty.js"></script>
+  </body>
 </html>
+
